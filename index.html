@@ -1458,30 +1458,26 @@
 
 </div>
 </main>
-<footer>
-<div class="uk-background-muted uk-margin-top uk-padding-small uk-text-center">
-<span class="uk-text-meta">© 韦健 2026. </span>
-</div>
 
-<div class="uk-section uk-section-small">
-  <div class="uk-container uk-container-small">
-    <div style="text-align:right; color:#666; font-size:14px;">
-      👁️ 累计访问：<span id="visitCount">0</span> 次
+  <footer>
+  <div class="uk-background-muted uk-margin-top uk-padding-small">
+    <div class="uk-container uk-container-small">
+      <div class="uk-grid-small uk-flex-middle" uk-grid>
+        <div class="uk-width-expand uk-text-center uk-text-left@s">
+          <span class="uk-text-meta">© 韦健 2026. </span>
+        </div>
+        <div class="uk-width-auto uk-text-center uk-text-right@s">
+          <span style="color:#666; font-size:14px;">👁️ 累计访问：<span id="visitCount">0</span> 次</span>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
 </footer>
 
-<!-- 访问量统计脚本 -->
 <script>
-// 方案1：使用免费第三方计数API（无需后端，直接用）
 (function() {
-  // 替换成你的专属ID（可自定义，比如你的姓名拼音+数字，用于区分不同页面）
   const counterId = "wei_jian_academic_page";
   const apiUrl = `https://api.countapi.xyz/hit/${counterId}/visits`;
-
-  // 获取当前计数并展示
   fetch(`https://api.countapi.xyz/get/${counterId}/visits`)
     .then(response => response.json())
     .then(data => {
@@ -1489,15 +1485,12 @@
     })
     .catch(err => {
       console.log("统计加载失败，使用本地缓存", err);
-      // 降级方案：使用本地存储计数（仅当前浏览器有效）
       let localCount = localStorage.getItem("local_visit_count") || 0;
       document.getElementById("visitCount").textContent = localCount;
     });
 
-  // 每次访问增加计数
   fetch(apiUrl)
     .catch(err => {
-      // 本地存储降级计数
       let localCount = localStorage.getItem("local_visit_count") || 0;
       localCount = parseInt(localCount) + 1;
       localStorage.setItem("local_visit_count", localCount);
